@@ -21,4 +21,10 @@ describe('addMatrices', () => {
         expect(addMatrices(A, B)).to.deep.equal(R);
     });
 
+    it('shoult return undefined when addMatrices([[2, 3], [0, 1]], [[3, 1, 1], [1, -1, 2]])', () => {
+        const A = [[2, 3], [0, 1]];
+        const B = [[3, 1, 1], [1, -1, 2]];
+        expect(addMatrices(A, B)).to.deep.equal(undefined);
+    });
+
 });
