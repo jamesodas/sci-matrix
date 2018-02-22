@@ -2,6 +2,7 @@ import isMatrixOfNumbers from './is-matrix-of-numbers';
 
 const addMatrices = (A, B) => {
   if (isMatrixOfNumbers(A) && isMatrixOfNumbers(B)) {
+    if (A.length !== B.length || A[0].length !== B[0].length) return undefined;
     const C = new Array(A.length);
     for (let i = 0; i < A.length; i += 1) {
       C[i] = new Array(A[0].length);
