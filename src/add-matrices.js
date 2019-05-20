@@ -1,4 +1,5 @@
 import isMatrixOfNumbers from './is-matrix-of-numbers';
+import Matrix from './matrix';
 
 const addMatrices = (A, B) => {
   if (isMatrixOfNumbers(A) && isMatrixOfNumbers(B)) {
@@ -10,7 +11,8 @@ const addMatrices = (A, B) => {
         C[i][j] = A[i][j] + B[i][j];
       }
     }
-    return C;
+
+    return new Matrix(C);
   }
   return undefined;
 };
