@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/static/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -74,74 +74,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _addMatrices = __webpack_require__(1);
-
-var _addMatrices2 = _interopRequireDefault(_addMatrices);
-
-var _matrix = __webpack_require__(4);
-
-var _matrix2 = _interopRequireDefault(_matrix);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var A = new _matrix2.default([[3, 2], [3, 1]]);
-var B = new _matrix2.default([[1, 1], [1, 1]]);
-
-console.log((0, _addMatrices2.default)(A, B));
-
-exports.default = _matrix2.default;
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _isMatrixOfNumbers = __webpack_require__(2);
-
-var _isMatrixOfNumbers2 = _interopRequireDefault(_isMatrixOfNumbers);
-
-var _matrix = __webpack_require__(4);
-
-var _matrix2 = _interopRequireDefault(_matrix);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var addMatrices = function addMatrices(A, B) {
-  if ((0, _isMatrixOfNumbers2.default)(A) && (0, _isMatrixOfNumbers2.default)(B)) {
-    if (A.length !== B.length || A[0].length !== B[0].length) return undefined;
-    var C = new Array(A.length);
-    for (var i = 0; i < A.length; i += 1) {
-      C[i] = new Array(A[0].length);
-      for (var j = 0; j < A[0].length; j += 1) {
-        C[i][j] = A[i][j] + B[i][j];
-      }
-    }
-
-    return new _matrix2.default(C);
-  }
-  return undefined;
-};
-
-exports.default = addMatrices;
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _isMatrix = __webpack_require__(3);
+var _isMatrix = __webpack_require__(4);
 
 var _isMatrix2 = _interopRequireDefault(_isMatrix);
 
@@ -161,28 +94,7 @@ var isMatrixOfNumbers = function isMatrixOfNumbers(array) {
 exports.default = isMatrixOfNumbers;
 
 /***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var isMatrix = function isMatrix(matriz) {
-  if (!Array.isArray(matriz)) return false;
-  return matriz.reduce(function (valorMatrizValida, elem, i, array) {
-    var matrizValida = valorMatrizValida;
-    matrizValida = matrizValida ? elem.length === array[i - 1].length : false;
-    return matrizValida;
-  });
-};
-
-exports.default = isMatrix;
-
-/***/ }),
-/* 4 */
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -192,7 +104,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _isMatrixOfNumbers = __webpack_require__(2);
+var _isMatrixOfNumbers = __webpack_require__(0);
 
 var _isMatrixOfNumbers2 = _interopRequireDefault(_isMatrixOfNumbers);
 
@@ -209,7 +121,9 @@ function theArgumentsAreValid(args) {
 
   if (args.length === 1 && args[0].constructor === Array && (0, _isMatrixOfNumbers2.default)(args[0])) {
     return true;
-  } else if (args.length === 2 && !Number.isNaN(args[0]) && !Number.isNaN(args[1])) return true;else return false;
+  } else if (args.length === 2 && !Number.isNaN(args[0]) && !Number.isNaN(args[1])) return true;
+
+  return false;
 }
 
 var Matrix = function (_Array) {
@@ -250,6 +164,94 @@ var Matrix = function (_Array) {
 }(Array);
 
 exports.default = Matrix;
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _addMatrices = __webpack_require__(3);
+
+var _addMatrices2 = _interopRequireDefault(_addMatrices);
+
+var _matrix = __webpack_require__(1);
+
+var _matrix2 = _interopRequireDefault(_matrix);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var A = new _matrix2.default([[3, 2], [3, 1]]);
+var B = new _matrix2.default([[1, 1], [1, 1]]);
+
+console.log((0, _addMatrices2.default)(A, B));
+
+exports.default = _matrix2.default;
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _isMatrixOfNumbers = __webpack_require__(0);
+
+var _isMatrixOfNumbers2 = _interopRequireDefault(_isMatrixOfNumbers);
+
+var _matrix = __webpack_require__(1);
+
+var _matrix2 = _interopRequireDefault(_matrix);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var addMatrices = function addMatrices(A, B) {
+  if ((0, _isMatrixOfNumbers2.default)(A) && (0, _isMatrixOfNumbers2.default)(B)) {
+    if (A.length !== B.length || A[0].length !== B[0].length) return undefined;
+    var C = new Array(A.length);
+    for (var i = 0; i < A.length; i += 1) {
+      C[i] = new Array(A[0].length);
+      for (var j = 0; j < A[0].length; j += 1) {
+        C[i][j] = A[i][j] + B[i][j];
+      }
+    }
+
+    return new _matrix2.default(C);
+  }
+  return undefined;
+};
+
+exports.default = addMatrices;
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var isMatrix = function isMatrix(matriz) {
+  if (!Array.isArray(matriz)) return false;
+  return matriz.reduce(function (valorMatrizValida, elem, i, array) {
+    var matrizValida = valorMatrizValida;
+    matrizValida = matrizValida ? elem.length === array[i - 1].length : false;
+    return matrizValida;
+  });
+};
+
+exports.default = isMatrix;
 
 /***/ })
 /******/ ]);
