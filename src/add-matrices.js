@@ -1,5 +1,5 @@
 import isMatrixOfNumbers from './is-matrix-of-numbers';
-import Matrix from './matrix';
+import Matrix from './type/matrix';
 
 const addMatrices = (A, B) => {
   if (isMatrixOfNumbers(A) && isMatrixOfNumbers(B)) {

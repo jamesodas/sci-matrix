@@ -108,6 +108,38 @@ var _isMatrixOfNumbers = __webpack_require__(0);
 
 var _isMatrixOfNumbers2 = _interopRequireDefault(_isMatrixOfNumbers);
 
+var _setIdentity = __webpack_require__(5);
+
+var _setIdentity2 = _interopRequireDefault(_setIdentity);
+
+var _isIdentity = __webpack_require__(6);
+
+var _isIdentity2 = _interopRequireDefault(_isIdentity);
+
+var _isSquare = __webpack_require__(7);
+
+var _isSquare2 = _interopRequireDefault(_isSquare);
+
+var _isRow = __webpack_require__(8);
+
+var _isRow2 = _interopRequireDefault(_isRow);
+
+var _isColumn = __webpack_require__(9);
+
+var _isColumn2 = _interopRequireDefault(_isColumn);
+
+var _theArgumentAreValid = __webpack_require__(10);
+
+var _theArgumentAreValid2 = _interopRequireDefault(_theArgumentAreValid);
+
+var _setZero = __webpack_require__(11);
+
+var _setZero2 = _interopRequireDefault(_setZero);
+
+var _setSize = __webpack_require__(12);
+
+var _setSize2 = _interopRequireDefault(_setSize);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -115,16 +147,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-function theArgumentsAreValid(args) {
-  if (args.length === 0 || args.length > 2) return false;
-
-  if (args.length === 1 && args[0].constructor === Array && (0, _isMatrixOfNumbers2.default)(args[0])) {
-    return true;
-  } else if (args.length === 2 && !Number.isNaN(args[0]) && !Number.isNaN(args[1])) return true;
-
-  return false;
-}
 
 var Matrix = function (_Array) {
   _inherits(Matrix, _Array);
@@ -134,11 +156,13 @@ var Matrix = function (_Array) {
 
     var _this = _possibleConstructorReturn(this, (Matrix.__proto__ || Object.getPrototypeOf(Matrix)).call(this));
 
+    _this.type = undefined;
+
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    if (theArgumentsAreValid(args)) {
+    if ((0, _theArgumentAreValid2.default)(args, _isMatrixOfNumbers2.default)) {
       if (args[0].constructor === Array) {
         for (var i = 0; i < args[0].length; i += 1) {
           _this[i] = args[0][i].constructor === Array ? args[0][i].slice() : args[0][i];
@@ -146,17 +170,20 @@ var Matrix = function (_Array) {
       } else {
         var m = args[0];
         var n = args[1];
-        for (var _i = 0; _i < m; _i += 1) {
-          _this[_i] = [];
-          for (var j = 0; j < n; j += 1) {
-            _this[_i][j] = 0;
-          }
-        }
+        (0, _setZero2.default)(_this, m, n);
       }
     }
 
-    _this.rows = _this.length;
-    _this.columns = _this[0] ? _this[0].length : 0;
+    (0, _setSize2.default)(_this);
+
+    if ((0, _isSquare2.default)(_this)) {
+      _this.type = 'Square';
+      _this.identity = (0, _isIdentity2.default)(_this);
+    } else {
+      if ((0, _isRow2.default)(_this)) _this.type = 'Row';else if ((0, _isColumn2.default)(_this)) _this.type = 'Column';else _this.type = 'Rectangular';
+    }
+
+    _this.setIdentity = _setIdentity2.default;
     return _this;
   }
 
@@ -186,10 +213,18 @@ var _matrix2 = _interopRequireDefault(_matrix);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var A = new _matrix2.default([[3, 2], [3, 1]]);
-var B = new _matrix2.default([[1, 1], [1, 1]]);
+var A = new _matrix2.default([[1, 0], [0, 0]]);
+var B = new _matrix2.default([[0, 0], [0, 1]]);
+var C = new _matrix2.default(3, 3).setIdentity();
+var D = new _matrix2.default(3, 2);
+
+console.log(A[0][0]);
 
 console.log((0, _addMatrices2.default)(A, B));
+
+console.log(C);
+
+console.log(D);
 
 exports.default = _matrix2.default;
 
@@ -252,6 +287,138 @@ var isMatrix = function isMatrix(matriz) {
 };
 
 exports.default = isMatrix;
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var setIdentity = function setIdentity() {
+  this.identity = true;
+  var m = this.rows;
+  var n = this.columns;
+  for (var i = 0; i < m; i += 1) {
+    for (var j = 0; j < n; j += 1) {
+      this[i][j] = i === j ? 1 : 0;
+    }
+  }
+  return this;
+};
+
+module.exports = setIdentity;
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var isIdentity = function isIdentity(A) {
+  var m = A.length;
+  var n = A[0] ? A[0].length : 0;
+  for (var i = 0; i < m; i += 1) {
+    for (var j = 0; j < n; j += 1) {
+      if (i === j && A[i][j] !== 1) return false;
+      if (i !== j && A[i][j] !== 0) return false;
+    }
+  }
+  return true;
+};
+
+module.exports = isIdentity;
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var isSquare = function isSquare(A) {
+  return A.rows === A.columns;
+};
+
+module.exports = isSquare;
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var isRow = function isRow(A) {
+  return A.rows === 1;
+};
+
+module.exports = isRow;
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var isColumn = function isColumn(A) {
+  return A.columns === 1;
+};
+
+module.exports = isColumn;
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var theArgumentsAreValid = function theArgumentsAreValid(args, isMatrixOfNumbers) {
+  if (args.length === 0 || args.length > 2) return false;
+
+  if (args.length === 1 && args[0].constructor === Array && isMatrixOfNumbers(args[0])) {
+    return true;
+  } else if (args.length === 2 && !Number.isNaN(args[0]) && !Number.isNaN(args[1])) return true;
+
+  return false;
+};
+
+module.exports = theArgumentsAreValid;
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var setZero = function setZero(A, m, n) {
+  for (var i = 0; i < m; i += 1) {
+    A[i] = [];
+    for (var j = 0; j < n; j += 1) {
+      A[i][j] = 0;
+    }
+  }
+};
+
+module.exports = setZero;
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var setSize = function setSize(A) {
+  A.rows = A.length;
+  A.columns = A[0] ? A[0].length : 0;
+};
+
+module.exports = setSize;
 
 /***/ })
 /******/ ]);
