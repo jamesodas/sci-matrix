@@ -184,6 +184,8 @@ var Matrix = function (_Array) {
     }
 
     _this.setIdentity = _setIdentity2.default;
+
+    Object.freeze(_this);
     return _this;
   }
 
@@ -215,7 +217,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var A = new _matrix2.default([[1, 0], [0, 0]]);
 var B = new _matrix2.default([[0, 0], [0, 1]]);
-var C = new _matrix2.default(3, 3).setIdentity();
+var C = new _matrix2.default(3, 3);
 var D = new _matrix2.default(3, 2);
 
 console.log(A[0][0]);
@@ -225,6 +227,9 @@ console.log((0, _addMatrices2.default)(A, B));
 console.log(C);
 
 console.log(D);
+console.log(D[0][0]);
+D[0][0] = 100;
+console.log(D[0][0]);
 
 exports.default = _matrix2.default;
 

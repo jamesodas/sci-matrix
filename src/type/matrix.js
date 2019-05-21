@@ -37,6 +37,8 @@ class Matrix extends Array {
     }
 
     this.setIdentity = setIdentity;
+
+    Object.freeze(this);
   }
 }
 
