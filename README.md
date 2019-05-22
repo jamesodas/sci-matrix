@@ -1,28 +1,28 @@
-# Qualicode Boilerplate JS
+# Matrix.js
 
-Conjunto de ferramentas configuradas para a produção de código JavaScript com alta qualidade, através de bibliotecas de testes automatizados, styleguide, module bundler e hooks git.
+Biblioteca Javascript para realizar operações sobre matrizes em um paradígma funcional. Para isso, define um tipo imutável para representar matrizes e define também uma śerie de funções puras que realizam operações sobre matrizes. 
 
 ## Getting Started
 
-Para utilizar este boilerplate, é necessário clonar o repositório:
+Instale a biblioteca
 ```
-git clone https://github.com/jamesodas/qualicode-bp-js.git meu-projeto
+npm install sci-matrix
 ```
-Entrar no diretório do projeto:
+Importe a bliblioteca
 ```
-cd meu-projeto
+import Matrix from 'sci-matrix'
 ```
-Excluir a pasta .git:
+Crie matrizes
 ```
-rm -rf .git
+const A = new Matrix('identity', 3)
 ```
-Reinicializar o respositório:
+Aplique funções
 ```
-git init
+const C = addMatrices(A, B)
 ```
-E por fim, deve-se instalar as dependências: 
+Consulte propriedades dos objetos das matrizes criadas com new Matrix
 ```
-npm install
+console.log(A.rows) // 3
 ```
 
 
