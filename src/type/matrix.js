@@ -11,6 +11,14 @@ import setSize from './set-size';
 class Matrix extends Array {
   constructor(...args) {
     super();
+
+    /** 
+     * tipos de matrizes:
+     *  - linha, coluna, quadrada, retangular
+     * 
+     * Propriedades:
+     *  - zero, identidade, diagonal, simetrica, triangular
+    */
     this.type = undefined;
     if (theArgumentsAreValid(args, checkIsMatrixOfNumbers)) {
       if (args[0].constructor === Array) {
@@ -27,18 +35,21 @@ class Matrix extends Array {
     setSize(this);
 
     if(isSquare(this)){
-      this.type = 'Square';
-      this.identity = isIdentity(this);
+      Object.defineProperty(this, 'type', { enumerable: false, value: 'Square' });
+      Object.defineProperty(this, 'identity', { enumerable: false, value: isIdentity(this) });
     } 
     else {
-      if(isRow(this)) this.type = 'Row';
-      else if(isColumn(this)) this.type = 'Column';
-      else this.type = 'Rectangular';
+      if(isRow(this)) Object.defineProperty(this, 'type', { enumerable: false, value: 'Row' });
+      else if(isColumn(this)) Object.defineProperty(this, 'type', { enumerable: false, value: 'Column' });
+      else Object.defineProperty(this, 'type', { enumerable: false, value: 'Rectangular' });
     }
 
-    this.setIdentity = setIdentity;
+    //this.setIdentity = setIdentity;
 
     Object.freeze(this);
+    this.forEach(item => {
+      Object.freeze(item);
+    });
   }
 }
 

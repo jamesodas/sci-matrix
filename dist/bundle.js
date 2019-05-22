@@ -177,15 +177,18 @@ var Matrix = function (_Array) {
     (0, _setSize2.default)(_this);
 
     if ((0, _isSquare2.default)(_this)) {
-      _this.type = 'Square';
-      _this.identity = (0, _isIdentity2.default)(_this);
+      Object.defineProperty(_this, 'type', { enumerable: false, value: 'Square' });
+      Object.defineProperty(_this, 'identity', { enumerable: false, value: (0, _isIdentity2.default)(_this) });
     } else {
-      if ((0, _isRow2.default)(_this)) _this.type = 'Row';else if ((0, _isColumn2.default)(_this)) _this.type = 'Column';else _this.type = 'Rectangular';
+      if ((0, _isRow2.default)(_this)) Object.defineProperty(_this, 'type', { enumerable: false, value: 'Row' });else if ((0, _isColumn2.default)(_this)) Object.defineProperty(_this, 'type', { enumerable: false, value: 'Column' });else Object.defineProperty(_this, 'type', { enumerable: false, value: 'Rectangular' });
     }
 
-    _this.setIdentity = _setIdentity2.default;
+    //this.setIdentity = setIdentity;
 
     Object.freeze(_this);
+    _this.forEach(function (item) {
+      Object.freeze(item);
+    });
     return _this;
   }
 
@@ -217,19 +220,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var A = new _matrix2.default([[1, 0], [0, 0]]);
 var B = new _matrix2.default([[0, 0], [0, 1]]);
-var C = new _matrix2.default(3, 3);
-var D = new _matrix2.default(3, 2);
+//const C = new Matrix(3, 3);
 
-console.log(A[0][0]);
-
-console.log((0, _addMatrices2.default)(A, B));
-
-console.log(C);
+var D = (0, _addMatrices2.default)(A, B);
 
 console.log(D);
-console.log(D[0][0]);
-D[0][0] = 100;
-console.log(D[0][0]);
+console.log(D.rows);
+console.log(D.columns);
+console.log(D.type);
+console.log(D.identity);
 
 exports.default = _matrix2.default;
 
@@ -419,8 +418,8 @@ module.exports = setZero;
 
 
 var setSize = function setSize(A) {
-  A.rows = A.length;
-  A.columns = A[0] ? A[0].length : 0;
+  Object.defineProperty(A, 'rows', { enumerable: false, value: A.length });
+  Object.defineProperty(A, 'columns', { enumerable: false, value: A[0] ? A[0].length : 0 });
 };
 
 module.exports = setSize;
