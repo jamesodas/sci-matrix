@@ -1,4 +1,4 @@
-# Matrix.js
+# SciMatrix
 
 Biblioteca Javascript para realizar operações sobre matrizes em um paradígma funcional. Para isso, define um tipo imutável para representar matrizes e define também uma śerie de funções puras que realizam operações sobre matrizes. 
 
