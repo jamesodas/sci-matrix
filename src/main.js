@@ -2,11 +2,12 @@ import addMatrices from './add-matrices';
 import Matrix from './type/matrix';
 
 const A = new Matrix([[1, 0], [0, 0]]);
-const B = new Matrix([[0, 0], [0, 1]]);
-// const C = new Matrix(3, 3);
+const B = new Matrix([[0, 0], [1, 1]]);
+const C = new Matrix([[1, 0, 1], [0, 0, 1], [1, 0, 1]]);
 
 const D = addMatrices(A, B);
 
+console.log(C);
 console.log(D);
 console.log(D.rows);
 console.log(D.columns);

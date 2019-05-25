@@ -140,6 +140,10 @@ var _setSize = __webpack_require__(12);
 
 var _setSize2 = _interopRequireDefault(_setSize);
 
+var _bottomDiagonalIsZero = __webpack_require__(13);
+
+var _bottomDiagonalIsZero2 = _interopRequireDefault(_bottomDiagonalIsZero);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -154,6 +158,13 @@ var Matrix = function (_Array) {
   function Matrix() {
     _classCallCheck(this, Matrix);
 
+    /** 
+     * tipos de matrizes:
+     *  - linha, coluna, quadrada, retangular
+     * 
+     * Propriedades:
+     *  - zero, identidade, diagonal, simetrica, triangular
+    */
     var _this = _possibleConstructorReturn(this, (Matrix.__proto__ || Object.getPrototypeOf(Matrix)).call(this));
 
     _this.type = undefined;
@@ -175,6 +186,8 @@ var Matrix = function (_Array) {
     }
 
     (0, _setSize2.default)(_this);
+
+    console.log('bottomDiagonalIsZero', (0, _bottomDiagonalIsZero2.default)(_this));
 
     if ((0, _isSquare2.default)(_this)) {
       Object.defineProperty(_this, 'type', { enumerable: false, value: 'Square' });
@@ -219,8 +232,8 @@ var _matrix2 = _interopRequireDefault(_matrix);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var A = new _matrix2.default([[1, 0], [0, 0]]);
-var B = new _matrix2.default([[0, 0], [0, 1]]);
-//const C = new Matrix(3, 3);
+var B = new _matrix2.default([[0, 0], [1, 1]]);
+var C = new _matrix2.default([[1, 0, 1], [0, 0, 1], [1, 0, 1]]);
 
 var D = (0, _addMatrices2.default)(A, B);
 
@@ -423,6 +436,26 @@ var setSize = function setSize(A) {
 };
 
 module.exports = setSize;
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var bottomDiagonalIsZero = function bottomDiagonalIsZero(A) {
+  var m = A.length;
+  var n = A[0] ? A[0].length : 0;
+  for (var i = 0; i < m; i += 1) {
+    for (var j = 0; j < n; j += 1) {
+      if (i > j && A[i][j] !== 0) return false;
+    }
+  }
+  return true;
+};
+
+module.exports = bottomDiagonalIsZero;
 
 /***/ })
 /******/ ]);
