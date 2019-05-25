@@ -1,4 +1,4 @@
-const bottomDiagonalIsZero = (A) => {
+const isUpperTriangular = (A) => {
   const m = A.length;
   const n = A[0] ? A[0].length : 0;
   for (let i = 0; i < m; i += 1) {
@@ -9,5 +9,5 @@ const bottomDiagonalIsZero = (A) => {
   return true;
 };
 
-module.exports = bottomDiagonalIsZero;
+module.exports = isUpperTriangular;
   

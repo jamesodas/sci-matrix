@@ -8,7 +8,7 @@ import theArgumentsAreValid from './the-argument-are-valid';
 import setZero from './set-zero';
 import setSize from './set-size';
 
-import bottomDiagonalIsZero from './bottom-diagonal-is-zero';
+import isUpperTriangular from './is-upper-triangular';
 
 class Matrix extends Array {
   constructor(...args) {
@@ -36,7 +36,7 @@ class Matrix extends Array {
 
     setSize(this);
 
-    console.log('bottomDiagonalIsZero', bottomDiagonalIsZero(this));
+    //console.log('bottomDiagonalIsZero', bottomDiagonalIsZero(this));
 
     if(isSquare(this)){
       Object.defineProperty(this, 'type', { enumerable: false, value: 'Square' });
