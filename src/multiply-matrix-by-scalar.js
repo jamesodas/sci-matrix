@@ -1,7 +1,7 @@
-import isMatrixOfNumbers from './is-matrix-of-numbers';
+import isMatrix from './type/helpers/is-matrix';
 
 const multiplyMatrixByScalar = (A, b) => {
-  if (isMatrixOfNumbers(A) && typeof b === 'number') {
+  if (isMatrix(A) && typeof b === 'number') {
     const C = new Array(A.length);
     for (let i = 0; i < A.length; i += 1) {
       C[i] = new Array(A[0].length);

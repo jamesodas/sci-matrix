@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/static/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -71,27 +71,27 @@
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
-
-var _isMatrix = __webpack_require__(4);
-
-var _isMatrix2 = _interopRequireDefault(_isMatrix);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var isMatrixOfNumbers = function isMatrixOfNumbers(array) {
-  if (!(0, _isMatrix2.default)(array)) return false;
-  for (var i = 0; i < array.length; i += 1) {
-    if (!Array.isArray(array[i]) && typeof array[i] !== 'number') return false;
-    for (var j = 0; j < array[i].length; j += 1) {
-      if (typeof array[i][j] !== 'number') return false;
+var isMatrix = function isMatrix(C) {
+    if (!Array.isArray(C) || C.length < 1) return false;
+    var length1 = Array.isArray(C[0]) ? C[0].length : undefined;
+    var simpleArray = false;
+    for (var i = 0; i < C.length; i++) {
+        if (Array.isArray(C[i]) && !simpleArray) {
+            if (i === 0) length1 = C[i].length;else if (C[i].length !== length1) return false;
+            for (var j = 0; j < C[i].length; j++) {
+                if (typeof C[i][j] !== 'number') return false;
+            }
+        } else {
+            if (typeof C[i] !== 'number') return false;
+            simpleArray = true;
+        }
     }
-  }
-  return true;
+    return true;
 };
 
-exports.default = isMatrixOfNumbers;
+exports.default = isMatrix;
 
 /***/ }),
 /* 1 */
@@ -104,7 +104,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _isMatrixOfNumbers = __webpack_require__(0);
+var _isMatrixOfNumbers = __webpack_require__(2);
 
 var _isMatrixOfNumbers2 = _interopRequireDefault(_isMatrixOfNumbers);
 
@@ -140,9 +140,9 @@ var _setSize = __webpack_require__(12);
 
 var _setSize2 = _interopRequireDefault(_setSize);
 
-var _bottomDiagonalIsZero = __webpack_require__(13);
+var _isDiagonal = __webpack_require__(13);
 
-var _bottomDiagonalIsZero2 = _interopRequireDefault(_bottomDiagonalIsZero);
+var _isDiagonal2 = _interopRequireDefault(_isDiagonal);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -167,8 +167,6 @@ var Matrix = function (_Array) {
     */
     var _this = _possibleConstructorReturn(this, (Matrix.__proto__ || Object.getPrototypeOf(Matrix)).call(this));
 
-    _this.type = undefined;
-
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
@@ -187,7 +185,7 @@ var Matrix = function (_Array) {
 
     (0, _setSize2.default)(_this);
 
-    console.log('bottomDiagonalIsZero', (0, _bottomDiagonalIsZero2.default)(_this));
+    //console.log('isDiagonal', isDiagonal(this));
 
     if ((0, _isSquare2.default)(_this)) {
       Object.defineProperty(_this, 'type', { enumerable: false, value: 'Square' });
@@ -221,29 +219,24 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _addMatrices = __webpack_require__(3);
+var _isMatrix = __webpack_require__(0);
 
-var _addMatrices2 = _interopRequireDefault(_addMatrices);
-
-var _matrix = __webpack_require__(1);
-
-var _matrix2 = _interopRequireDefault(_matrix);
+var _isMatrix2 = _interopRequireDefault(_isMatrix);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var A = new _matrix2.default([[1, 0], [0, 0]]);
-var B = new _matrix2.default([[0, 0], [1, 1]]);
-var C = new _matrix2.default([[1, 0, 1], [0, 0, 1], [1, 0, 1]]);
+var isMatrixOfNumbers = function isMatrixOfNumbers(array) {
+  if (!(0, _isMatrix2.default)(array)) return false;
+  for (var i = 0; i < array.length; i += 1) {
+    if (!Array.isArray(array[i]) && typeof array[i] !== 'number') return false;
+    for (var j = 0; j < array[i].length; j += 1) {
+      if (typeof array[i][j] !== 'number') return false;
+    }
+  }
+  return true;
+};
 
-var D = (0, _addMatrices2.default)(A, B);
-
-console.log(D);
-console.log(D.rows);
-console.log(D.columns);
-console.log(D.type);
-console.log(D.identity);
-
-exports.default = _matrix2.default;
+exports.default = isMatrixOfNumbers;
 
 /***/ }),
 /* 3 */
@@ -256,7 +249,59 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _isMatrixOfNumbers = __webpack_require__(0);
+var _addMatrices = __webpack_require__(4);
+
+var _addMatrices2 = _interopRequireDefault(_addMatrices);
+
+var _matrix = __webpack_require__(1);
+
+var _matrix2 = _interopRequireDefault(_matrix);
+
+var _isMatrix = __webpack_require__(0);
+
+var _isMatrix2 = _interopRequireDefault(_isMatrix);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//const A = new Matrix([[1, 0], [0, 0]]);
+//const B = new Matrix([[0, 0], [1, 1]]);
+var C = new _matrix2.default([[1, 0, 0], [0, 4, 0], [0, 0, 1]]);
+
+//const D = addMatrices(A, B);
+
+var E = new _matrix2.default([1, 0, 1]);
+
+//console.log("isColumn ", isColumn(E));
+
+//console.log(Array.isArray(C));
+//console.log(typeof C);
+//console.log(C instanceof Array);
+//console.log(C.constructor);
+
+//console.log(C);
+console.log((0, _isMatrix2.default)(C));
+
+//console.log(C);
+//console.log(D);
+//console.log(D.rows);
+//console.log(D.columns);
+//console.log(D.type);
+//console.log(D.identity);
+
+exports.default = _matrix2.default;
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _isMatrixOfNumbers = __webpack_require__(2);
 
 var _isMatrixOfNumbers2 = _interopRequireDefault(_isMatrixOfNumbers);
 
@@ -283,27 +328,6 @@ var addMatrices = function addMatrices(A, B) {
 };
 
 exports.default = addMatrices;
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var isMatrix = function isMatrix(matriz) {
-  if (!Array.isArray(matriz)) return false;
-  return matriz.reduce(function (valorMatrizValida, elem, i, array) {
-    var matrizValida = valorMatrizValida;
-    matrizValida = matrizValida ? elem.length === array[i - 1].length : false;
-    return matrizValida;
-  });
-};
-
-exports.default = isMatrix;
 
 /***/ }),
 /* 5 */
@@ -380,7 +404,18 @@ module.exports = isRow;
 "use strict";
 
 
+var _matrix = __webpack_require__(1);
+
+var _matrix2 = _interopRequireDefault(_matrix);
+
+var _isMatrix = __webpack_require__(0);
+
+var _isMatrix2 = _interopRequireDefault(_isMatrix);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var isColumn = function isColumn(A) {
+  console.log(A);
   return A.columns === 1;
 };
 
@@ -444,7 +479,50 @@ module.exports = setSize;
 "use strict";
 
 
-var bottomDiagonalIsZero = function bottomDiagonalIsZero(A) {
+var _isLowerTriangular = __webpack_require__(14);
+
+var _isLowerTriangular2 = _interopRequireDefault(_isLowerTriangular);
+
+var _isUpperTriangular = __webpack_require__(15);
+
+var _isUpperTriangular2 = _interopRequireDefault(_isUpperTriangular);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var isDiagonal = function isDiagonal(A) {
+  return (0, _isLowerTriangular2.default)(A) && (0, _isUpperTriangular2.default)(A);
+};
+
+module.exports = isDiagonal;
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var isLowerTriangular = function isLowerTriangular(A) {
+  var m = A.length;
+  var n = A[0] ? A[0].length : 0;
+  for (var i = 0; i < m; i += 1) {
+    for (var j = 0; j < n; j += 1) {
+      if (i < j && A[i][j] !== 0) return false;
+    }
+  }
+  return true;
+};
+
+module.exports = isLowerTriangular;
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var isUpperTriangular = function isUpperTriangular(A) {
   var m = A.length;
   var n = A[0] ? A[0].length : 0;
   for (var i = 0; i < m; i += 1) {
@@ -455,7 +533,7 @@ var bottomDiagonalIsZero = function bottomDiagonalIsZero(A) {
   return true;
 };
 
-module.exports = bottomDiagonalIsZero;
+module.exports = isUpperTriangular;
 
 /***/ })
 /******/ ]);

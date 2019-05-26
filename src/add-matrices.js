@@ -1,4 +1,4 @@
-import isMatrixOfNumbers from './is-matrix-of-numbers';
+import isMatrixOfNumbers from './type/helpers/is-matrix-of-numbers';
 import Matrix from './type/matrix';
 
 const addMatrices = (A, B) => {

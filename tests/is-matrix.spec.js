@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import isMatrix from '../src/is-matrix.js';
+import isMatrix from '../src/type/helpers/is-matrix';
 
 describe('isMatrix', () => {
 
@@ -14,7 +14,7 @@ describe('isMatrix', () => {
 
     it('shoult return true when isMatrix( [ [2, 3, "a"], [3, 4, 5], [4, 5, 6] ] )', () => {
         const A = [ [2, 3, "a"], [3, 4, 5], [4, 5, 6] ];
-        expect(isMatrix(A)).to.be.equal(true);
+        expect(isMatrix(A)).to.be.equal(false);
     });
 
     it('shoult return false when isMatrix( [ [2, 3], [3, 4, 5], [4, 5, 6] ] )', () => {

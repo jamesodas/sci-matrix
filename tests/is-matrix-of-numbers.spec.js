@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import isMatrixOfNumbers from '../src/is-matrix-of-numbers.js';
+import isMatrixOfNumbers from '../src/type/helpers/is-matrix-of-numbers';
 
 describe('isMatrixOfNumbers', () => {
 

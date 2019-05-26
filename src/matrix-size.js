@@ -1,4 +1,4 @@
-import isMatrix from './is-matrix';
+import isMatrix from './type/helpers/is-matrix';
 
 const matrixSize = (matriz) => {
   if (!Array.isArray(matriz)) return undefined;

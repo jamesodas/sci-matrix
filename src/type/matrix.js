@@ -1,14 +1,14 @@
-import checkIsMatrixOfNumbers from '../is-matrix-of-numbers';
+import checkIsMatrixOfNumbers from './helpers/is-matrix-of-numbers';
 import setIdentity from '../set-identity';
-import isIdentity from './is-identity';
-import isSquare from './is-square';
-import isRow from './is-row';
-import isColumn from './is-column';
-import theArgumentsAreValid from './the-argument-are-valid';
-import setZero from './set-zero';
-import setSize from './set-size';
+import isIdentity from './helpers/is-identity';
+import isSquare from './helpers/is-square';
+import isRow from './helpers/is-row';
+import isColumn from './helpers/is-column';
+import theArgumentsAreValid from './helpers/the-argument-are-valid';
+import setZero from './helpers/set-zero';
+import setSize from './helpers/set-size';
 
-import isUpperTriangular from './is-upper-triangular';
+import isDiagonal from './helpers/is-diagonal';
 
 class Matrix extends Array {
   constructor(...args) {
@@ -21,7 +21,6 @@ class Matrix extends Array {
      * Propriedades:
      *  - zero, identidade, diagonal, simetrica, triangular
     */
-    this.type = undefined;
     if (theArgumentsAreValid(args, checkIsMatrixOfNumbers)) {
       if (args[0].constructor === Array) {
         for (let i = 0; i < args[0].length; i += 1) {
@@ -36,7 +35,7 @@ class Matrix extends Array {
 
     setSize(this);
 
-    //console.log('bottomDiagonalIsZero', bottomDiagonalIsZero(this));
+    //console.log('isDiagonal', isDiagonal(this));
 
     if(isSquare(this)){
       Object.defineProperty(this, 'type', { enumerable: false, value: 'Square' });
