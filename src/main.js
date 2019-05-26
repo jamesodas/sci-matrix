@@ -1,14 +1,13 @@
 // import addMatrices from './add-matrices';
 import Matrix from './type/matrix';
-import isMatrix from './type/helpers/is-matrix';
 
 // const A = new Matrix([[1, 0], [0, 0]]);
 // const B = new Matrix([[0, 0], [1, 1]]);
-const C = new Matrix([[1, 0, 0], [0, 4, 0], [0, 0, 1]]);
+// const C = new Matrix([[1, 0, 0], [0, 4, 0], [0, 0, 1]]);
 
 // const D = addMatrices(A, B);
 
-// const E = new Matrix([1, 0, 1]);
+const E = new Matrix('identity', 5, 5);
 
 // console.log("isColumn ", isColumn(E));
 
@@ -17,8 +16,8 @@ const C = new Matrix([[1, 0, 0], [0, 4, 0], [0, 0, 1]]);
 // console.log(C instanceof Array);
 // console.log(C.constructor);
 
-// console.log(C);
-console.log(isMatrix(C));
+console.log(E);
+// console.log(isMatrix(C));
 
 // console.log(C);
 // console.log(D);

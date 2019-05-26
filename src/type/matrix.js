@@ -1,14 +1,16 @@
 import checkIsMatrixOfNumbers from './helpers/is-matrix-of-numbers';
-import setIdentity from '../set-identity';
+import setIdentity from './helpers/set-identity';
 import isIdentity from './helpers/is-identity';
 import isSquare from './helpers/is-square';
 import isRow from './helpers/is-row';
 import isColumn from './helpers/is-column';
-import theArgumentsAreValid from './helpers/the-argument-are-valid';
+import theArgumentsAreValid from './helpers/the-arguments-are-valid';
 import setZero from './helpers/set-zero';
 import setSize from './helpers/set-size';
 
 import isDiagonal from './helpers/is-diagonal';
+import isMatrix from './helpers/is-matrix';
+import setMatrixValues from './helpers/set-matrix-values';
 
 class Matrix extends Array {
   constructor(...args) {
@@ -21,15 +23,20 @@ class Matrix extends Array {
      * Propriedades:
      *  - zero, identidade, diagonal, simetrica, triangular
     */
-    if (theArgumentsAreValid(args, checkIsMatrixOfNumbers)) {
-      if (args[0].constructor === Array) {
-        for (let i = 0; i < args[0].length; i += 1) {
-          this[i] = args[0][i].constructor === Array ? args[0][i].slice() : args[0][i];
-        }        
+
+    //console.log(theArgumentsAreValid(args));
+    if (theArgumentsAreValid(args)) {
+      if (isMatrix(args[0])) {
+          setMatrixValues(this, args[0]);
       } else {
-        const m = args[0];
-        const n = args[1];
-        setZero(this, m ,n);
+        switch(args[0]){
+          case 'zero':
+            setZero(this, args[1], args[2]);
+            break;
+          case 'identity':
+            setIdentity(this, args[1], args[2]);
+            break;
+        }
       }
     }
 
